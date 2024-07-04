@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap");
+
+/* Universal Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif, arial;
+  height: 100vh;
+  color: white;
+}
+
+h1 {
+  font-size: 3rem;
+  background-color: black;
+  padding: 1.5rem;
+  border: none;
+  border-radius: 0.5rem 0.5rem 0rem 0rem;
+}
+
+.gradient {
+  background: -webkit-linear-gradient(250deg, rgb(255, 184, 6) 4%, rgb(247, 0, 255) 96%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Container Styles */
+.container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 0.625rem;
+  background: linear-gradient(250deg, rgb(55, 2, 57) 4%, rgb(0, 11, 93) 96%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.appContainer {
+    height: 60vh;
+    width: 100%;
+    background-color: rgba(254, 213, 255, 0.188);
+    border-radius: 0rem 0rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.input-container input {
+    padding: 0.3rem;
+    width: 10rem;
+    outline: none;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 0.4rem;
+    font-weight: 600;
+}
+
+.input-container select {
+    width: 10rem;
+    border: none;
+    padding: 0.3rem;
+    border-radius: 0.4rem;
+    outline: none;
+    font-weight: 600;
+}
+
+button {
+    padding: 1rem 3rem;
+    border: none;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    border-radius: 0.3rem;
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.188);
+    color: rgb(255, 255, 255);
+}
+
+.button-container {
+    margin-top: 2rem;
+}
+
+#input {
+    width: 60%;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.594);
+    border: none;
+    border-radius: 1rem;
+    color: white;
+    text-align: center;
+    font-size: 2rem;
+    cursor: default;
+    outline: none;
+}
