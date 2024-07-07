@@ -8,12 +8,12 @@
 
 - **Predefined or Custom Tip Calculation**: Calculate tips easily using a predefined amount or enter a custom percentage.
 
+- **Split the bill**: Shows total alongside how much each person has to pay.
+
 ## Current Version
 
-**Version 1.0.1**
+**Version 1.2.0**
 
 ## Upcoming Features
 
-**Version 1.2.1** will include:
-
-- **Currency Selection**: Soon, you'll be able to change the currency for tip calculations.
+--
