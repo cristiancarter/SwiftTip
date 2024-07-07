@@ -1,48 +1,96 @@
-const input = document.getElementById("input");
-let billAmount = document.getElementById("amount");
-let customTip = document.getElementById("custom-tip");
-const resetBtn = document.getElementById("reset-btn");
-const calculateBtn = document.getElementById("calculate-btn");
-const percentageDrop = document.getElementById("percentage");
+const billAmount = document.getElementById('bill-amount');
+const customTip = document.getElementById('custom-tip');
+const customTipGroup = document.getElementById('custom-tip-group');
+const resetBtn = document.getElementById('reset-btn');
+const calculateBtn = document.getElementById('calculate-btn');
+const result = document.getElementById('result');
+const tipOptions = document.querySelectorAll('.tip-option');
+const peopleInput = document.getElementById('people');
+const currencyButtons = document.querySelectorAll('.currency-toggle button');
 
-resetBtn.addEventListener("click", function () {
-  input.value = "";
-  customTip.value = "";
-  billAmount.value = "";
-  percentageDrop.value = 0;
+let selectedTip = 15;
+let selectedCurrency = '£';
+
+tipOptions.forEach(option => {
+    option.addEventListener('click', () => {
+        tipOptions.forEach(opt => opt.classList.remove('active'));
+        option.classList.add('active');
+        if (option.dataset.tip === 'custom') {
+            customTipGroup.style.display = 'block';
+            selectedTip = parseFloat(customTip.value) || 0;
+        } else {
+            customTipGroup.style.display = 'none';
+            selectedTip = parseFloat(option.dataset.tip);
+        }
+    });
 });
 
-calculateBtn.addEventListener("click", function () {
-  const amount = parseFloat(billAmount.value);
-
-  if (isNaN(amount) || amount <= 0) {
-    input.value = "Please provide a valid amount";
-    return;
-  }
-
-  const percentage = parseFloat(percentageDrop.value);
-  const customTipValue = parseFloat(customTip.value) / 100;
-
-  let tipAmount;
-
-  if (customTip.value && customTipValue > 0) {
-    tipAmount = (amount * customTipValue).toFixed(2);
-    percentageDrop.value = 0;
-  } else {
-    tipAmount = (amount * percentage).toFixed(2);
-    customTip.value = "";
-  }
-
-  input.value = `£${tipAmount}`;
+customTip.addEventListener('input', () => {
+    selectedTip = parseFloat(customTip.value) || 0;
 });
 
-document.addEventListener("keydown", function (event) {
-  if (event.key === "Enter") {
-    calculateBtn.click();
-  }
+currencyButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        currencyButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        selectedCurrency = button.textContent;
+        calculateTip();
+    });
 });
-document.addEventListener("keydown", function (event) {
-  if (event.key == "R" || event.key === "r") {
-    resetBtn.click();
-  }
+
+calculateBtn.addEventListener('click', calculateTip);
+resetBtn.addEventListener('click', resetCalculator);
+
+function calculateTip() {
+    const bill = parseFloat(billAmount.value);
+    const people = parseInt(peopleInput.value) || 1;
+
+    if (isNaN(bill) || bill <= 0) {
+        result.textContent = 'Please enter a valid bill amount';
+        return;
+    }
+
+    const tipAmount = (bill * selectedTip) / 100;
+    const totalAmount = bill + tipAmount;
+    const perPersonAmount = totalAmount / people;
+
+    result.innerHTML = `
+        Tip: ${selectedCurrency}${tipAmount.toFixed(2)}<br>
+        Total: ${selectedCurrency}${totalAmount.toFixed(2)}<br>
+        Per Person: ${selectedCurrency}${perPersonAmount.toFixed(2)}
+    `;
+
+    animateResult();
+}
+
+function resetCalculator() {
+    billAmount.value = '';
+    customTip.value = '';
+    peopleInput.value = '1';
+    result.textContent = '';
+    tipOptions.forEach(opt => opt.classList.remove('active'));
+    tipOptions[1].classList.add('active'); 
+    selectedTip = 15;
+    customTipGroup.style.display = 'none';
+}
+
+function animateResult() {
+    gsap.from("#result", {
+        duration: 0.5,
+        opacity: 0,
+        y: 20,
+        ease: "power2.out"
+    });
+}
+
+
+tipOptions[1].classList.add('active');
+
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        calculateTip();
+    } else if (event.key === 'r' || event.key === 'R') {
+        resetCalculator();
+    }
 });

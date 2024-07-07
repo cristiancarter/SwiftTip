@@ -1,46 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SwiftTip</title>
+    <title>SwiftTip 2.0 - Modern Tipping Calculator</title>
     <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
 </head>
-
 <body>
-    <main class="container">
-        <div class="app">
-            <h1><span class="gradient">SwiftTip</span> - Tip easier than ever before</h1>
-            <div class="appContainer">
-                <input type="" id="input" readonly placeholder="£..." class="input" draggable="false">
-                <div class="input-container">
-                    <label for="amount">Enter your total bill amount:</label>
-                    <input type="number" id="amount" required min="1" class="input">
-                </div>
-                <div class="input-container">
-                    <label for="percentage">Select a tip percentage:</label>
-                    <select id="percentage" required">
-                        <option value="0">%...</option>
-                        <option value="0.05">5%</option>
-                        <option value="0.10">10%</option>
-                        <option value="0.15">15%</option>
-                        <option value="0.20">20%</option>
-                        <option value="0.25">25%</option>
-                    </select>
-                </div>
-                <div class="input-container">
-                    <label for="custom-tip">Enter your custom tip percentage:</label>
-                    <input type="number" id="custom-tip" min="0" max="100" class="input">
-                </div>
-                <div class="button-container">
-                    <button accesskey="enter" id="calculate-btn" type="button">Calculate Tip</button>
-                    <button id="reset-btn" type="button">Reset</button>
-                </div>
-            </div>
+    <div class="container">
+        <h1>SwiftTip 2.0</h1>
+        <div class="currency-toggle">
+            <button id="currency-gbp" class="active">£</button>
+            <button id="currency-usd">$</button>
+            <button id="currency-eur">€</button>
         </div>
-    </main>
+        <div class="input-group">
+            <label for="bill-amount">Bill Amount</label>
+            <input type="number" id="bill-amount" placeholder="Enter bill amount" min="0" step="0.01">
+        </div>
+        <div class="tip-options">
+            <div class="tip-option" data-tip="10">10%</div>
+            <div class="tip-option" data-tip="15">15%</div>
+            <div class="tip-option" data-tip="18">18%</div>
+            <div class="tip-option" data-tip="20">20%</div>
+            <div class="tip-option" data-tip="custom">Custom</div>
+        </div>
+        <div class="input-group" id="custom-tip-group" style="display: none;">
+            <label for="custom-tip">Custom Tip %</label>
+            <input type="number" id="custom-tip" placeholder="Enter custom tip %" min="0" max="100">
+        </div>
+        <div class="split-bill">
+            <label for="people">Split bill among: </label>
+            <input type="number" id="people" value="1" min="1" max="100">
+            <span>people</span>
+        </div>
+        <div class="btn-group">
+            <button id="calculate-btn">Calculate</button>
+            <button id="reset-btn">Reset</button>
+        </div>
+        <div id="result"></div>
+    </div>
+
 </body>
 </html>
